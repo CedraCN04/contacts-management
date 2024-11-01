@@ -1,34 +1,47 @@
 "use client";
 import SearchIcon from "@mui/icons-material/Search";
-import { Container, TextField } from "@mui/material";
+import { FormControl, Input, InputAdornment, InputLabel } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 
 export default function SearchBar() {
   const [viewTextfieldSearch, setViewTextfieldSearch] = useState(false);
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   const handleSearch = () => {
     setViewTextfieldSearch(!viewTextfieldSearch);
   };
+
   return (
-    <Container
+    <FormControl
+      variant="standard"
       sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        gap: "12px",
+        fontSize: isMobile ? "14px" : "20px",
+        transition: "ease-in-out 0.5s",
       }}
     >
-      <SearchIcon onClick={handleSearch} />
-      <TextField
-        sx={{
-          width: { xs: "100%", sm: "300px" },
-          display: viewTextfieldSearch ? "flex" : "none",
-        }}
-        id="search"
-        label="Rechercher"
-        variant="standard"
-      />
-    </Container>
+      {isMobile && !viewTextfieldSearch ? (
+        <SearchIcon onClick={handleSearch} sx={{ cursor: "pointer" }} />
+      ) : (
+        <>
+          <InputLabel htmlFor="search">Rechercher</InputLabel>
+          <Input
+            id="search"
+            type="text"
+            sx={{
+              fontSize: isMobile ? "14px" : "20px",
+              transition: "opacity 0.5s ease-in-out",
+              opacity: viewTextfieldSearch || !isMobile ? 1 : 0,
+            }}
+            startAdornment={
+              <InputAdornment position="start">
+                <SearchIcon onClick={handleSearch} sx={{ cursor: "pointer" }} />
+              </InputAdornment>
+            }
+          />
+        </>
+      )}
+    </FormControl>
   );
 }
 
