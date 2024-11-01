@@ -1,7 +1,7 @@
+import { commonStyles, fontSizeTypo } from "@/lib/personnalStyles";
 import AddIcon from "@mui/icons-material/Add";
 import StarIcon from "@mui/icons-material/Star";
 import {
-  Container,
   Drawer,
   List,
   ListItem,
@@ -25,44 +25,41 @@ export default function SideMenu({ open, onClose }: MenuProps) {
         gap: "10px",
       }}
     >
-      <ListItem sx={{ xs: { width: "60%" }, md: { width: "100%" } }}>
+      <ListItem>
         <ListItemButton
           sx={{
             bgcolor: blue[300],
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "10px",
-            borderRadius: 20,
+            ":hover": {
+              bgcolor: blue[200],
+            },
+            ...commonStyles,
           }}
         >
-          <AddIcon /> <Typography>Créer contact</Typography>
+          <AddIcon />{" "}
+          <Typography sx={{ ...fontSizeTypo }}>Créer contact</Typography>
         </ListItemButton>
       </ListItem>
       <ListItem>
         <ListItemButton
           sx={{
             bgcolor: green[500],
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "10px",
-            borderRadius: 20,
+            ":hover": {
+              bgcolor: green[400],
+            },
+            ...commonStyles,
           }}
         >
-          <StarIcon /> <Typography>Contacts Favoris</Typography>
+          <StarIcon />{" "}
+          <Typography sx={{ ...fontSizeTypo }}>Contacts Favoris</Typography>
         </ListItemButton>
       </ListItem>
     </List>
   );
 
   return (
-    <Container sx={{ xs: { width: 250 }, md: { width: 600 } }}>
-      <Drawer anchor="left" open={open} onClose={onClose}>
-        {DrawerList}
-      </Drawer>
-    </Container>
+    <Drawer anchor="left" open={open} onClose={onClose} sx={{ width: "50%" }}>
+      {DrawerList}
+    </Drawer>
   );
 }
 
