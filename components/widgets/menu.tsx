@@ -1,8 +1,7 @@
-import useMobile from "@/lib/hooks/useIsMobile";
 import AddIcon from "@mui/icons-material/Add";
 import StarIcon from "@mui/icons-material/Star";
 import {
-  Box,
+  Container,
   Drawer,
   List,
   ListItem,
@@ -17,49 +16,53 @@ interface MenuProps {
 }
 
 export default function SideMenu({ open, onClose }: MenuProps) {
-  const isMobile = useMobile();
-
   const DrawerList = (
-    <Box sx={{ width: 250 }}>
-      <List
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      >
-        <ListItem sx={{ width: "60%" }}>
-          <ListItemButton
-            sx={{
-              bgcolor: blue[300],
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 20,
-            }}
-          >
-            {isMobile ? <AddIcon /> : "Créer un contact"}
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton
-            sx={{
-              bgcolor: green[500],
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              borderRadius: 20,
-            }}
-          >
-            <StarIcon /> <Typography>Contacts Favoris</Typography>
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Box>
+    <List
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "10px",
+      }}
+    >
+      <ListItem sx={{ xs: { width: "60%" }, md: { width: "100%" } }}>
+        <ListItemButton
+          sx={{
+            bgcolor: blue[300],
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            borderRadius: 20,
+          }}
+        >
+          <AddIcon /> <Typography>Créer contact</Typography>
+        </ListItemButton>
+      </ListItem>
+      <ListItem>
+        <ListItemButton
+          sx={{
+            bgcolor: green[500],
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            borderRadius: 20,
+          }}
+        >
+          <StarIcon /> <Typography>Contacts Favoris</Typography>
+        </ListItemButton>
+      </ListItem>
+    </List>
   );
 
   return (
-    <Drawer anchor="left" open={open} onClose={onClose}>
-      {DrawerList}
-    </Drawer>
+    <Container sx={{ xs: { width: 250 }, md: { width: 600 } }}>
+      <Drawer anchor="left" open={open} onClose={onClose}>
+        {DrawerList}
+      </Drawer>
+    </Container>
   );
 }
 
