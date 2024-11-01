@@ -1,8 +1,7 @@
-import useMobile from "@/lib/hooks/useIsMobile";
+import { commonStyles, fontSizeTypo } from "@/lib/personnalStyles";
 import AddIcon from "@mui/icons-material/Add";
 import StarIcon from "@mui/icons-material/Star";
 import {
-  Box,
   Drawer,
   List,
   ListItem,
@@ -17,47 +16,48 @@ interface MenuProps {
 }
 
 export default function SideMenu({ open, onClose }: MenuProps) {
-  const isMobile = useMobile();
-
   const DrawerList = (
-    <Box sx={{ width: 250 }}>
-      <List
-        sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-      >
-        <ListItem sx={{ width: "60%" }}>
-          <ListItemButton
-            sx={{
-              bgcolor: blue[300],
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: 20,
-            }}
-          >
-            {isMobile ? <AddIcon /> : "Créer un contact"}
-          </ListItemButton>
-        </ListItem>
-        <ListItem>
-          <ListItemButton
-            sx={{
-              bgcolor: green[500],
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "10px",
-              borderRadius: 20,
-            }}
-          >
-            <StarIcon /> <Typography>Contacts Favoris</Typography>
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Box>
+    <List
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: "10px",
+      }}
+    >
+      <ListItem>
+        <ListItemButton
+          sx={{
+            bgcolor: blue[300],
+            ":hover": {
+              bgcolor: blue[200],
+            },
+            ...commonStyles,
+          }}
+        >
+          <AddIcon />{" "}
+          <Typography sx={{ ...fontSizeTypo }}>Créer contact</Typography>
+        </ListItemButton>
+      </ListItem>
+      <ListItem>
+        <ListItemButton
+          sx={{
+            bgcolor: green[500],
+            ":hover": {
+              bgcolor: green[400],
+            },
+            ...commonStyles,
+          }}
+        >
+          <StarIcon />{" "}
+          <Typography sx={{ ...fontSizeTypo }}>Contacts Favoris</Typography>
+        </ListItemButton>
+      </ListItem>
+    </List>
   );
 
   return (
-    <Drawer anchor="left" open={open} onClose={onClose}>
+    <Drawer anchor="left" open={open} onClose={onClose} sx={{ width: "50%" }}>
       {DrawerList}
     </Drawer>
   );
