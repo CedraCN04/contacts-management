@@ -2,7 +2,6 @@ import { commonStyles, fontSizeTypo } from "@/lib/personnalStyles";
 import AddIcon from "@mui/icons-material/Add";
 import StarIcon from "@mui/icons-material/Star";
 import {
-  Box,
   Drawer,
   List,
   ListItem,
@@ -18,44 +17,44 @@ interface MenuProps {
 }
 
 const DrawerList: FC = () => (
-    <List
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "10px",
-        margin: "0 20px",
-      }}
-    >
-      <ListItem>
-        <ListItemButton
-          sx={{
-            bgcolor: blue[300],
-            ":hover": {
-              bgcolor: blue[200],
-            },
-            ...commonStyles,
-          }}
-        >
-          <AddIcon />{" "}
-          <Typography sx={{ ...fontSizeTypo }}>Créer contact</Typography>
-        </ListItemButton>
-      </ListItem>
-      <ListItem>
-        <ListItemButton
-          sx={{
-            bgcolor: green[500],
-            ":hover": {
-              bgcolor: green[400],
-            },
-            ...commonStyles,
-          }}
-        >
-          <StarIcon />{" "}
-          <Typography sx={{ ...fontSizeTypo }}>Contacts Favoris</Typography>
-        </ListItemButton>
-      </ListItem>
-    </List>
+  <List
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "10px",
+      margin: "0 20px",
+    }}
+  >
+    <ListItem>
+      <ListItemButton
+        sx={{
+          bgcolor: blue[300],
+          ":hover": {
+            bgcolor: blue[200],
+          },
+          ...commonStyles,
+        }}
+      >
+        <AddIcon />{" "}
+        <Typography sx={{ ...fontSizeTypo }}>Créer contact</Typography>
+      </ListItemButton>
+    </ListItem>
+    <ListItem>
+      <ListItemButton
+        sx={{
+          bgcolor: green[500],
+          ":hover": {
+            bgcolor: green[400],
+          },
+          ...commonStyles,
+        }}
+      >
+        <StarIcon />{" "}
+        <Typography sx={{ ...fontSizeTypo }}>Contacts Favoris</Typography>
+      </ListItemButton>
+    </ListItem>
+  </List>
 );
 
 const SideMenu: FC<MenuProps> = ({ open, onClose }) => (
