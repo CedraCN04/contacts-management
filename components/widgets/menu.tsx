@@ -2,6 +2,7 @@ import { commonStyles, fontSizeTypo } from "@/lib/personnalStyles";
 import AddIcon from "@mui/icons-material/Add";
 import StarIcon from "@mui/icons-material/Star";
 import {
+  Box,
   Drawer,
   List,
   ListItem,
@@ -9,20 +10,21 @@ import {
   Typography,
 } from "@mui/material";
 import { blue, green } from "@mui/material/colors";
+import { FC, memo } from "react";
 
 interface MenuProps {
   open: boolean;
   onClose: () => void;
 }
 
-export default function SideMenu({ open, onClose }: MenuProps) {
-  const DrawerList = (
+const DrawerList: FC = () => (
     <List
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         gap: "10px",
+        margin: "0 20px",
       }}
     >
       <ListItem>
@@ -54,12 +56,20 @@ export default function SideMenu({ open, onClose }: MenuProps) {
         </ListItemButton>
       </ListItem>
     </List>
-  );
+);
 
-  return (
-    <Drawer anchor="left" open={open} onClose={onClose} sx={{ width: "50%" }}>
-      {DrawerList}
-    </Drawer>
-  );
-}
+const SideMenu: FC<MenuProps> = ({ open, onClose }) => (
+  <Drawer
+    anchor="left"
+    open={open}
+    onClose={onClose}
+    sx={{
+      transform: "translateX(0px)",
+    }}
+  >
+    <DrawerList />
+  </Drawer>
+);
+
+export default memo(SideMenu);
 
