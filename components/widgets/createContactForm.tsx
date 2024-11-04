@@ -17,11 +17,11 @@ interface CreateContactFormProps {
 }
 
 type Contact = {
-  id: String;
-  name: String;
-  firstname: String;
-  email: String;
-  phone: String;
+  id: string;
+  name: string;
+  firstname: string;
+  email: string;
+  phone: string;
 };
 
 export default function CreateContactForm({
