@@ -1,3 +1,5 @@
+"use client";
+
 import { commonStyles, fontSizeTypo } from "@/lib/personnalStyles";
 import AddIcon from "@mui/icons-material/Add";
 import StarIcon from "@mui/icons-material/Star";
@@ -10,13 +12,22 @@ import {
 } from "@mui/material";
 import { blue, green } from "@mui/material/colors";
 import { FC, memo } from "react";
+import { useState } from "react";
+import CreateContactForm from "./createContactForm";
 
 interface MenuProps {
   open: boolean;
   onClose: () => void;
 }
 
-const DrawerList: FC = () => (
+const DrawerList: FC = () => {
+  const [showContactForm, setShowContactForm] = useState(false);
+
+  const handleCreateContact = () => {
+    setShowContactForm(true);
+  }
+
+  return (
   <List
     sx={{
       display: "flex",
@@ -35,6 +46,7 @@ const DrawerList: FC = () => (
           },
           ...commonStyles,
         }}
+        onClick={handleCreateContact}
       >
         <AddIcon />{" "}
         <Typography sx={{ ...fontSizeTypo }}>Créer contact</Typography>
@@ -54,8 +66,9 @@ const DrawerList: FC = () => (
         <Typography sx={{ ...fontSizeTypo }}>Contacts Favoris</Typography>
       </ListItemButton>
     </ListItem>
+    {showContactForm && <CreateContactForm open={showContactForm} setOpen={setShowContactForm}/>}
   </List>
-);
+)};
 
 const SideMenu: FC<MenuProps> = ({ open, onClose }) => (
   <Drawer
