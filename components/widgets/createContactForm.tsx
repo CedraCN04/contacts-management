@@ -1,5 +1,7 @@
 "use client";
 
+import { generateRandomId, handleClose, saveContact } from "@/lib/functions";
+import { Contact, CreateContactFormProps } from "@/types/types";
 import {
   Button,
   Dialog,
@@ -10,19 +12,6 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-
-interface CreateContactFormProps {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-}
-
-type Contact = {
-  id: string;
-  name: string;
-  firstname: string;
-  email: string;
-  phone: string;
-};
 
 export default function CreateContactForm({
   open,
@@ -35,17 +24,6 @@ export default function CreateContactForm({
     email: "",
     phone: "",
   });
-
-  const saveContact = (contact: Contact) => {
-    const contacts = JSON.parse(localStorage.getItem("contacts") || "[]");
-    contacts.push(contact);
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-    handleClose();
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <Dialog open={open} onClose={handleClose}>
@@ -95,8 +73,15 @@ export default function CreateContactForm({
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Annuler</Button>
-        <Button onClick={() => saveContact(contact)}>Créer</Button>
+        <Button onClick={() => handleClose}>Annuler</Button>
+        <Button
+          onClick={() => {
+            const newContact = { ...contact, id: generateRandomId("") };
+            saveContact(newContact, setOpen);
+          }}
+        >
+          Créer
+        </Button>
       </DialogActions>
     </Dialog>
   );
